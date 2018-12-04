@@ -1,5 +1,5 @@
-Vagrant environment
-===================
+Eskapade on a vagrant box
+=========================
 
 Consistent environments for Eskapade development and use are created with virtual machines.  Machines are created and
 managed by `Vagrant <https://www.vagrantup.com/>`_, with `VirtualBox <https://www.virtualbox.org/>`_ as a provider.

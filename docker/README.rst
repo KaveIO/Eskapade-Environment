@@ -1,5 +1,5 @@
-Docker environment
-==================
+Eskapade with Docker
+====================
 
 Consistent environments for Eskapade development and use can be created with docker containers. Containers are created and managed by `Docker <https://www.docker.com/>`_. An Eskapade container contains a pre-installed Eskapade setup and runs out-of-the-box.  It is possible to mount your customised Eskapade code for development inside the container.
 
