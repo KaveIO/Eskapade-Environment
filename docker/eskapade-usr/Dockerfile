@@ -32,9 +32,8 @@ USER $NB_UID
 ENV ROOT_ENV_SCRIPT "/opt/root/bin/thisroot.sh"
 RUN source "${ROOT_ENV_SCRIPT}" \
     && pip install Eskapade==0.8.2 \
-#    && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git@v0.8.4#egg=eskapade-root \
-    && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git#egg=eskapade-root \
-    && pip install Eskapade-Spark==0.8.3 \
+    && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git@v0.8.5#egg=eskapade-root \
+    && pip install Eskapade-Spark==0.8.4 \
     && pip install sphinx_rtd_theme==0.4.1 \
     && pip install pymongo==3.4.0 \
     && pip install jaydebeapi==1.1.1 \
