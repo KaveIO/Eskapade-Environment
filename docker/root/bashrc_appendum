@@ -1,0 +1,8 @@
+
+# setup root
+source /opt/root/bin/thisroot.sh
+
+# useful aliases
+alias jupy='jupyter notebook --port 8888 --ip=0.0.0.0 --allow-root --NotebookApp.token=\"\"'
+alias gitlog='git log --graph --decorate --oneline'
+
