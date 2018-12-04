@@ -85,17 +85,17 @@ See section `After you exit Docker`_ (below) for cleaning up obsolete docker pro
 Mounting source code
 ::::::::::::::::::::
 
-.. code:: bash
-
-  $  docker run -v <ESKAPADE>:/opt/eskapade -p 8888:8888 -it kave/eskapade-usr:latest bash
-
-Where ``<ESKAPADE>`` specifies the path of the Eskapade source code on the docker host, and where ``/opt/eskapade`` is the location of the Eskapade source code inside the container.
-
-NOTE: in case you mount a clean installation of the Eskapade source code, you have to (re-)build the libraries by executing:
+In this example we create a directory ``work``.
+We give the default docker user (jovyan) user ownership (uid=1000), 
+and start the container with the host work folder mounted.
 
 .. code:: bash
 
-  $ pip install -e /opt/eskapade
+  $  mkdir work
+  $  sudo chown 1000 work
+  $  docker run -v $PWD/work:/opt/work -p 8888:8888 -it kave/eskapade-usr:latest bash
+
+Where ``$PWD/work`` specifies the path of the code on the local machine, and where ``/opt/work`` is the location of the Eskapade source code inside the container.
 
 
 Running as root user
