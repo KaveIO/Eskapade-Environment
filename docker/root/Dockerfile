@@ -1,5 +1,7 @@
 # --- base image: pyspark jupyter container
 #     see for all containers: https://hub.docker.com/u/jupyter/
+#     Here we build ROOT on top of that.
+#     This serves as the basis for eskapade-usr docker image.
 FROM jupyter/pyspark-notebook:14fdfbf9cfc1
 
 # --- me
@@ -23,7 +25,7 @@ RUN cd /tmp && \
     tar xvfz root_v6.14.06.source.tar.gz && \
     mkdir /opt/root && \
     cd /opt/root && \
-    cmake /tmp/root-6.14.06/ -Droofit=ON -Dminuit2=ON -Dxrootd=OFF -Drfio=OFF -Dpythia6=OFF -Dpythia8=OFF -Dtmva=OFF -Dasimage=OFF -Dastiff=OFF && \
+    cmake /tmp/root-6.14.06/ -Droofit=ON -Dminuit2=ON -Dxrootd=OFF -Drfio=OFF -Dpythia6=OFF -Dpythia8=OFF -Dtmva=ON -Dasimage=OFF -Dastiff=OFF && \
     cmake --build . -- -j`nproc --all` && \
     cp /tmp/root-6.14.06/cmake/modules/RootNewMacros.cmake /tmp && \
     rm -Rf /tmp/root-6.14.06 /tmp/root_v6.14.06.source.tar.gz && \
