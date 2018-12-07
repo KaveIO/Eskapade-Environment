@@ -14,8 +14,8 @@ Eskapade-Environment contains two configurations for run environments for Eskapa
 Release notes
 =============
 
-Version 0.9
------------
+Version 0.9.0
+-------------
 
 In version 0.9 of Eskapade (December 2018) the docker and vagrant configurations have been taken out of the Eskapade repository,
 and put into this separate package. This way, the Eskapade version no longer controls the version numbers of the published containers at dockerhub, 
@@ -35,7 +35,7 @@ Installation
 Eskapade requires Python 3 and is pip friendly. However Eskapade-ROOT and Eskapade-Spark require, you guessed it, ROOT and Spark,
 which are available in the run environments.
 
-* The Eskapade docker image contains the following versions: ``Eskapade v0.9.0``, ``Eskapade-ROOT v0.8.5``, and ``Eskapade-Spark v0.8.4``. Type:
+* The Eskapade docker image contains the following versions: ``Eskapade v0.9.0``, ``Eskapade-Core v0.9.0``, ``Eskapade-ROOT v0.9.0``, and ``Eskapade-Spark v0.9.0``. Type:
 
   .. code-block:: bash
 
