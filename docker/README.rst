@@ -5,8 +5,8 @@ Consistent environments for Eskapade development and use can be created with doc
 
 The instructions below show how one can use a locally checked-out version of Eskapade in combination with this Docker image. This combination is a very convenient way of actively working with and/or developing code in Eskapade.
 
-By default, Eskapade code is executed as ``root`` user in the container. It is possible, however, to run with reduced user privileges inside containers through user
-mapping with the Docker host, as decribed in the last section.
+By default, Eskapade code is executed as ``jovyan`` user in the container. It is possible, however, to run with root privileges inside containers through, 
+as decribed in the last section.
 
 
 Required software
