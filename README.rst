@@ -2,7 +2,7 @@
 Eskapade-Environment
 ====================
 
-* Version: 0.9.0
+* Version: 0.9.1
 * Released: Dec 2018
 
 Eskapade is a light-weight, python-based data analysis framework, meant for modularizing all sorts of data analysis problems
@@ -13,6 +13,11 @@ Eskapade-Environment contains two configurations for run environments for Eskapa
 
 Release notes
 =============
+
+Version 0.9.1
+-------------
+
+Bump up to ``Eskapade-Core v0.9.1`` and ``Eskapade v0.9.1``, which have an updated version of ``eskapade_bootstrap``.
 
 Version 0.9.0
 -------------
