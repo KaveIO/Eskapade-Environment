@@ -28,14 +28,8 @@ RUN cat /tmp/bashrc_appendum >> "${HOME}"/.bashrc && rm /tmp/bashrc_appendum
 # --- switch to jovyan user
 USER $NB_UID
 
-# --- install Eskapade and other useful python packages
-ENV ROOT_ENV_SCRIPT "/opt/root/bin/thisroot.sh"
-RUN source "${ROOT_ENV_SCRIPT}" \
-    && pip install Eskapade-Core==0.9.1 \
-    && pip install Eskapade==0.9.1 \
-    && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git@v0.9.0#egg=eskapade-root \
-    && pip install Eskapade-Spark==0.9.0 \
-    && pip install sphinx_rtd_theme==0.4.1 \
+# --- install other useful python packages
+RUN pip install sphinx_rtd_theme==0.4.1 \
     && pip install pymongo==3.4.0 \
     && pip install jaydebeapi==1.1.1 \
     && pip install django==2.0.5 \
@@ -46,7 +40,14 @@ RUN source "${ROOT_ENV_SCRIPT}" \
     && pip install dash-renderer==0.14.3 \
     && pip install dash-table==3.1.5
 
+# --- install Eskapade
+ENV ROOT_ENV_SCRIPT "/opt/root/bin/thisroot.sh"
+RUN source "${ROOT_ENV_SCRIPT}" \
+    && pip install Eskapade-Core==0.9.2 \
+    && pip install Eskapade==0.9.3 \
+    && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git@v0.9.0#egg=eskapade-root \
+    && pip install Eskapade-Spark==0.9.0
+
 # --- Note on Eskapade-ROOT: pip does not pick up custom cxx installation from pypi repo, 
 #     but does so from git when installing in editable mode. Strange but true.
 #     See: https://stackoverflow.com/questions/19569557/pip-not-picking-up-a-custom-install-cmdclass
-
