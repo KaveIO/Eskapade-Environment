@@ -1,5 +1,5 @@
 # --- base image: latest known Eskapade environment
-FROM kave/root:6.14.06
+FROM kave/eskapade-base:0.8.6
 
 # --- me
 MAINTAINER Max Baak <baak.max@kpmg.nl>
@@ -43,7 +43,7 @@ RUN pip install sphinx_rtd_theme==0.4.1 \
 # --- install Eskapade
 ENV ROOT_ENV_SCRIPT "/opt/root/bin/thisroot.sh"
 RUN source "${ROOT_ENV_SCRIPT}" \
-    && pip install Eskapade-Core==0.9.2 \
+    && pip install Eskapade-Core==0.9.3 \
     && pip install Eskapade==0.9.3 \
     && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git@v0.9.0#egg=eskapade-root \
     && pip install Eskapade-Spark==0.9.0
