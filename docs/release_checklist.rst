@@ -19,9 +19,12 @@ Check for all relevant repositories that every test runs okay and all documents 
   At this stage do not yet tag the code.
 
 * if failure:
+
   - fix and commit updates/fixes only in gitlab.
   - go to step 1.
+
 * else: 
+
   - per repository: update version number in ``setup.py``, ``README.rst``, ``docs/source/conf.py``.
   - write release note in ``README.rst`` and ``releasenotes.rst``.
   - commit these updates only in gitlab.
@@ -63,6 +66,7 @@ and can now be updated.
   Make sure the version numbers in ``setup.py``, ``README.rst``, ``docs/source/conf.py`` are up-to-date.
 
 * Log in at `read-the-docs <https://readthedocs.org/>`_ with the kpmg user:
+
   - User name: *************
   - Password: *************
 
@@ -88,9 +92,12 @@ and can now be updated.
       on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
 * if failure:
+
   - update the documentation and/or documentation's configuration (``conf.py``) and/or the ``setup.py`` file.
   - go back to step 1.
+
 * else:
+
   - go to step 4.
 
 4. Build the updated base docker image
@@ -143,9 +150,11 @@ To do so, follow the instructions in the Environment package for `eskapade-usr <
     docker$ eskapade_trail .
 
 * if failure:
+
   - if code failure: fix and go to step 1.
   - else if docker failure: fix and goto step 4 or step 5.
-  - else: goto step 6.
+
+* else: goto step 6.
 
 .. note::
   Do not yet push this image to dockerhub.
