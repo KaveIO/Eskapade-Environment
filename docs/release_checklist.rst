@@ -43,15 +43,19 @@ repository (``Core`` on gitlab) and and pushing to it.
 You should do this for each updated repository.
 
 .. code-block:: bash
-  $ cd top-of-eskapade-dir/
-  $ # switch to master branch
-  $ git checkout master
-  $ # adding a remote repository called github             
-  $ git remote add github git@github.com:KaveIO/Eskapade-Core.git
-  $ # this next command shows the available remotes: origin and github
-  $ git remote 
-  $ # push to remote github
-  $ git push github master
+  
+  # switch to master branch
+  cd top-of-eskapade-dir/
+  git checkout master
+  
+  # adding a remote repository called github             
+  git remote add github git@github.com:KaveIO/Eskapade-Core.git
+  
+  # this next command shows the available remotes: origin and github
+  git remote 
+  
+  # push to remote github
+  git push github master
 
 .. note::
   At this stage do not yet tag the code or push the tag to gitlab or github.
@@ -88,6 +92,7 @@ and can now be updated.
     or in the ``conf.py`` file in the ``docs/`` directory.
 
     .. code-block:: python
+      
       # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
       on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
@@ -107,7 +112,9 @@ Build locally the updated base docker (``eskapade-base``) and/or vagrant image(s
 To do so, follow the instructions in the Environment package for `eskapade-base <https://github.com/KaveIO/Eskapade-Environment/tree/master/docker/eskapade-base>`_.
 
 * Clone the Environment repository:
+
   .. code-block:: bash
+    
     git clone https://git.kpmg.nl/KPMG-NL-AABD/Assets/Eskapade/Environment.git
     cd Environment/docker/eskapade-base/
     
@@ -128,13 +135,16 @@ Build locally the updated docker (``eskapade-usr``) and/or vagrant image(s) for 
 To do so, follow the instructions in the Environment package for `eskapade-usr <https://github.com/KaveIO/Eskapade-Environment/tree/master/docker/eskapade-usr>`_.
 
 * Go to the Environment repository:
+
   .. code-block:: bash
+    
     cd Environment/docker/eskapade-usr/
     
 * Update the ``Dockerfile`` with the new ``eskapade-base`` image.
 * Update the ``Dockerfile`` with the latest Eskapade versions, but (for now) check them out from github (so, not yet from PyPi):
 
   .. code-block:: bash
+    
     RUN source "${ROOT_ENV_SCRIPT}" \
     && pip install -e git+https://github.com/KaveIO/Eskapade-Core.git#egg=eskapade-core \
     && pip install -e git+https://github.com/KaveIO/Eskapade.git#egg=eskapade \
@@ -146,6 +156,7 @@ To do so, follow the instructions in the Environment package for `eskapade-usr <
 * When done, start the image and run all the Eskapade tests to check if they run okay:
 
   .. code-block:: bash
+    
     local$ docker run -it kave/eskapade-usr:latest bash
     docker$ eskapade_trail .
 
@@ -175,12 +186,14 @@ Time to push the updated package(s) to PyPi server. For each updated Eskapade pa
 * Make sure you have installed the packages ``wheel`` and ``twine``:
   
   .. code-block:: bash
+    
     pip install wheel
     pip install twine
 
 * Build the wheel for each updated Eskapade package:
 
   .. code-block:: bash
+    
     # build the wheel
     cd top-of-eskapade-dir/
     rm -Rf dist
@@ -189,10 +202,12 @@ Time to push the updated package(s) to PyPi server. For each updated Eskapade pa
 * Upload the wheel to PyPi with the command:
 
   .. code-block:: bash
+    
     # upload wheel to pypi
     twine upload dist/*
                   
 * You will be asked for a username and password:
+
   - User name: *************
   - Password: *************
 
@@ -218,15 +233,16 @@ You should do the following instructions for each updated repository.
   Below, replace 0.8 with your actual version number.
 
 .. code-block:: bash
+  
   # switch to master branch of repo
   cd top-of-eskapade-dir/
   git checkout master
-
+  
   ## adding a remote repository called github             
   #git remote add github git@github.com:KaveIO/Eskapade-Core.git
   ## this next command shows the available remotes: origin and github
   #git remote 
-
+  
   # tagging: replace 0.8 with your version number
   git tag -a v0.8 -m "Eskapade version 0.8"
   git push origin v0.8
@@ -244,13 +260,16 @@ Again, we use the files from the Environment package for `eskapade-usr <https://
   Next, your user will also need to be part of the ``kave`` organization. Ask someone in the team with ``kave`` admin rights to add you.
 
 * Go to the Environment repository:
+
   .. code-block:: bash
+    
     cd Environment/docker/eskapade-usr/
   
 * Update the ``Dockerfile`` with the latest Eskapade versions, but now check them out from PyPi.
   For example (fill in the correct version numbers):
 
   .. code-block:: bash
+    
     RUN source "${ROOT_ENV_SCRIPT}" \
     && pip install Eskapade-Core==0.9.3 \
     && pip install Eskapade==0.9.3 \
@@ -265,16 +284,21 @@ Again, we use the files from the Environment package for `eskapade-usr <https://
 * When done, start the image and run all the Eskapade tests. They should all run okay by now:
 
   .. code-block:: bash
+    
     local$ docker run -it kave/eskapade-usr:latest bash
     docker$ eskapade_trail .
 
 * Make sure to tag the ``latest`` docker images. For example (fill in the correct version numbers):
+
   .. code-block:: bash
+    
     docker tag eskapade-base:YOUR_NEW_VERSION eskapade-base:latest
     docker tag eskapade-usr:YOUR_NEW_VERSION eskapade-usr:latest
 
 * Push the docker images to dockerhub with (fill in the correct version numbers):
+
   .. code-block:: bash
+    
     docker push eskapade-base:YOUR_NEW_VERSION
     docker push eskapade-base:latest
     docker push eskapade-usr:YOUR_NEW_VERSION
@@ -295,20 +319,21 @@ Commit and tag the updates to the Environment package. Below, make sure to tag t
 After committing the code, make sure to tag and also push the changes to github:
   
 .. code-block:: bash
+  
   # switch to master branch of environment repo
   cd Environment/
   git checkout master
-
+  
   # adding the remote Environment repository, called github             
   git remote add github git@github.com:KaveIO/Eskapade-Environment.git
   # this next command shows the available remotes: origin and github
   git remote 
-
+  
   # push the changes to origin
   git push
   # push to remote
   git push github master
-  
+    
   # tagging: replace 0.8 with your version new number
   git tag -a v0.8 -m "Eskapade docker version 0.8"
   git push origin v0.8
