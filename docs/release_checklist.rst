@@ -43,15 +43,15 @@ repository (``Core`` on gitlab) and and pushing to it.
 You should do this for each updated repository.
 
 .. code-block:: bash
-  cd top-of-eskapade-dir/
-  # switch to master branch
-  git checkout master
-  # adding a remote repository called github             
-  git remote add github git@github.com:KaveIO/Eskapade-Core.git
-  # this next command shows the available remotes: origin and github
-  git remote 
-  # push to remote github
-  git push github master
+  $ cd top-of-eskapade-dir/
+  $ # switch to master branch
+  $ git checkout master
+  $ # adding a remote repository called github             
+  $ git remote add github git@github.com:KaveIO/Eskapade-Core.git
+  $ # this next command shows the available remotes: origin and github
+  $ git remote 
+  $ # push to remote github
+  $ git push github master
 
 .. note::
   At this stage do not yet tag the code or push the tag to gitlab or github.
