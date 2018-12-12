@@ -2,7 +2,7 @@
 Eskapade-Environment
 ====================
 
-* Version: 0.9.3
+* Version: 0.9.4
 * Released: Dec 2018
 
 Eskapade is a light-weight, python-based data analysis framework, meant for modularizing all sorts of data analysis problems
@@ -13,6 +13,12 @@ Eskapade-Environment contains two configurations for run environments for Eskapa
 
 Release notes
 =============
+
+Version 0.9.4
+-------------
+
+Set environment variables of ROOT in Dockerfile, so ROOT is known in Jupyter at startup.
+
 
 Version 0.9.3
 -------------

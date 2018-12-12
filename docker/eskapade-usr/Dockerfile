@@ -11,7 +11,7 @@ USER root
 SHELL ["/bin/bash", "-c"]
 
 # --- useful Ubuntu packages, e.g. pdflatex. 
-RUN apt-get update && apt-get install -y --no-install-recommends less vim aspell dvipng && \
+RUN apt-get update && apt-get install -y --no-install-recommends manpages manpages-dev less vim aspell dvipng && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -51,3 +51,9 @@ RUN source "${ROOT_ENV_SCRIPT}" \
 # --- Note on Eskapade-ROOT: pip does not pick up custom cxx installation from pypi repo, 
 #     but does so from git when installing in editable mode. Strange but true.
 #     See: https://stackoverflow.com/questions/19569557/pip-not-picking-up-a-custom-install-cmdclass
+
+# --- set relevant ROOT environment variables, so root is known in jupyter at startup
+ENV ROOTSYS "/opt/root"
+ENV LD_LIBRARY_PATH "${ROOTSYS}/lib:${LD_LIBRARY_PATH}"
+ENV JUPYTER_PATH "${ROOTSYS}/etc/notebook:${JUPYTER_PATH}"
+ENV PYTHONPATH "${ROOTSYS}/lib:${PYTHONPATH}"

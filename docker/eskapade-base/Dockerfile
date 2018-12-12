@@ -47,3 +47,9 @@ RUN source /opt/root/bin/thisroot.sh && \
     pip install root_numpy==4.7.3 && \
     pip install rootpy==1.0.1
 
+# --- set relevant ROOT environment variables, so root is known in jupyter at startup
+ENV ROOTSYS "/opt/root"
+ENV LD_LIBRARY_PATH "${ROOTSYS}/lib:${LD_LIBRARY_PATH}"
+ENV JUPYTER_PATH "${ROOTSYS}/etc/notebook:${JUPYTER_PATH}"
+ENV PYTHONPATH "${ROOTSYS}/lib:${PYTHONPATH}"
+
