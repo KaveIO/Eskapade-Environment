@@ -2,8 +2,8 @@
 Eskapade-Environment
 ====================
 
-* Version: 0.9.4
-* Released: Dec 2018
+* Version: 1.0.0
+* Released: Feb 2018
 
 Eskapade is a light-weight, python-based data analysis framework, meant for modularizing all sorts of data analysis problems
 into reusable analysis components. For documentation on Eskapade, please go to this `link <http://eskapade.readthedocs.io>`_.
@@ -13,6 +13,14 @@ Eskapade-Environment contains two configurations for run environments for Eskapa
 
 Release notes
 =============
+
+Version 1.0.0
+-------------
+
+* Bump up pyspark jupyter container to latest version (Feb 2019).
+* Bump up ROOT version to v6.16.00.
+* Turn on Asimage compilation for ROOT. Needed for TCanvas plots in jupyter.
+* Bump up Eskapade versions to v1.0.0. Eskapade goes parallel.
 
 Version 0.9.4
 -------------

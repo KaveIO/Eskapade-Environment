@@ -1,11 +1,11 @@
 # --- base image: pyspark jupyter container
 #     see for all containers: https://hub.docker.com/u/jupyter/
-#     Here we build ROOT on top of that.
-#     This serves as the basis for eskapade-usr docker image.
-FROM jupyter/pyspark-notebook:14fdfbf9cfc1
+#     This serves as the basis for our docker image.
+#     tag 45b8529a6bfc from: 2019-02-14
+FROM jupyter/pyspark-notebook:45b8529a6bfc
 
 # --- me
-MAINTAINER Max Baak <baak.max@kpmg.nl>
+MAINTAINER Max Baak <maxbaak@gmail.com>
 
 # --- switch to root user
 USER root
@@ -21,19 +21,19 @@ RUN apt-get -y update && \
 
 # --- install ROOT; turn off stuff we do not need
 RUN cd /tmp && \ 
-    wget https://root.cern.ch/download/root_v6.14.06.source.tar.gz && \
-    tar xvfz root_v6.14.06.source.tar.gz && \
+    wget https://root.cern.ch/download/root_v6.16.00.source.tar.gz && \
+    tar xvfz root_v6.16.00.source.tar.gz && \
     mkdir /opt/root && \
     cd /opt/root && \
-    cmake /tmp/root-6.14.06/ -Droofit=ON -Dminuit2=ON -Dxrootd=OFF -Drfio=OFF -Dpythia6=OFF -Dpythia8=OFF -Dtmva=ON -Dasimage=OFF -Dastiff=OFF && \
-    cmake --build . -- -j`nproc --all` && \
-    cp /tmp/root-6.14.06/cmake/modules/RootNewMacros.cmake /tmp && \
-    rm -Rf /tmp/root-6.14.06 /tmp/root_v6.14.06.source.tar.gz && \
+    cmake /tmp/root-6.16.00/ -Droofit=ON -Dminuit2=ON -Dxrootd=OFF -Drfio=OFF -Dpythia6=OFF -Dpythia8=OFF -Dtmva=ON && \
+    cmake --build . -- -j4 && \
+    cp /tmp/root-6.16.00/cmake/modules/RootNewMacros.cmake /tmp && \
+    rm -Rf /tmp/root-6.16.00 /tmp/root_v6.16.00.source.tar.gz && \
     cd /opt/root && \
     rm -Rf `find . -name '*CMakeFiles' ` && \
     rm -Rf `find . -name '*src' ` && \
-    mkdir -p /tmp/root-6.14.06/cmake/modules/ && \
-    mv /tmp/RootNewMacros.cmake /tmp/root-6.14.06/cmake/modules/
+    mkdir -p /tmp/root-6.16.00/cmake/modules/ && \
+    mv /tmp/RootNewMacros.cmake /tmp/root-6.16.00/cmake/modules/
 
 # --- append sourcing of ROOT env to bashrc
 COPY bashrc_appendum /tmp/
@@ -52,4 +52,3 @@ ENV ROOTSYS "/opt/root"
 ENV LD_LIBRARY_PATH "${ROOTSYS}/lib:${LD_LIBRARY_PATH}"
 ENV JUPYTER_PATH "${ROOTSYS}/etc/notebook:${JUPYTER_PATH}"
 ENV PYTHONPATH "${ROOTSYS}/lib:${PYTHONPATH}"
-
