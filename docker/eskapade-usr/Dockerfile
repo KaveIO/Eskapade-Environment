@@ -1,8 +1,8 @@
 # --- base image: latest known Eskapade environment
-FROM kave/eskapade-base:0.8.6
+FROM kave/eskapade-base:1.0.0
 
 # --- me
-MAINTAINER Max Baak <baak.max@kpmg.nl>
+MAINTAINER Max Baak <maxbaak@gmail.com>
 
 # --- switch to root user
 USER root
@@ -14,6 +14,13 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y --no-install-recommends manpages manpages-dev less vim aspell dvipng && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# --- import pyarrow 0.11.1 fails out of the box; required for feather
+#     see bug: https://github.com/apache/arrow/issues/2213
+#     downgrade pyarrow to working verion
+RUN conda install -y boost-cpp=1.68.0=h3a22d5f_0 && \
+    conda install -y parquet-cpp=1.5.1=2 && \
+    conda install -y pyarrow=0.11.1=py36hfc679d8_0
 
 # --- trigger automatic installation of required Spark dependencies. Requires Spark setup.
 ENV PATH=/usr/local/spark/bin:$PATH
@@ -43,17 +50,11 @@ RUN pip install sphinx_rtd_theme==0.4.1 \
 # --- install Eskapade
 ENV ROOT_ENV_SCRIPT "/opt/root/bin/thisroot.sh"
 RUN source "${ROOT_ENV_SCRIPT}" \
-    && pip install Eskapade-Core==0.9.3 \
-    && pip install Eskapade==0.9.3 \
+    && pip install Eskapade-Core==1.0.0 \
+    && pip install Eskapade==1.0.0 \
     && pip install -e git+https://github.com/KaveIO/Eskapade-ROOT.git@v0.9.0#egg=eskapade-root \
-    && pip install Eskapade-Spark==0.9.0
+    && pip install Eskapade-Spark==1.0.0
 
 # --- Note on Eskapade-ROOT: pip does not pick up custom cxx installation from pypi repo, 
 #     but does so from git when installing in editable mode. Strange but true.
 #     See: https://stackoverflow.com/questions/19569557/pip-not-picking-up-a-custom-install-cmdclass
-
-# --- set relevant ROOT environment variables, so root is known in jupyter at startup
-ENV ROOTSYS "/opt/root"
-ENV LD_LIBRARY_PATH "${ROOTSYS}/lib:${LD_LIBRARY_PATH}"
-ENV JUPYTER_PATH "${ROOTSYS}/etc/notebook:${JUPYTER_PATH}"
-ENV PYTHONPATH "${ROOTSYS}/lib:${PYTHONPATH}"
