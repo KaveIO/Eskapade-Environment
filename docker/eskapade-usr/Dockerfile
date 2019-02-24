@@ -2,7 +2,7 @@
 FROM kave/eskapade-base:1.0.0
 
 # --- me
-MAINTAINER Max Baak <baak.max@kpmg.nl>
+MAINTAINER Max Baak <maxbaak@gmail.com>
 
 # --- switch to root user
 USER root
@@ -14,6 +14,13 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && apt-get install -y --no-install-recommends manpages manpages-dev less vim aspell dvipng && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# --- import pyarrow 0.11.1 fails out of the box; required for feather
+#     see bug: https://github.com/apache/arrow/issues/2213
+#     downgrade pyarrow to working verion
+RUN conda install -y boost-cpp=1.68.0=h3a22d5f_0 && \
+    conda install -y parquet-cpp=1.5.1=2 && \
+    conda install -y pyarrow=0.11.1=py36hfc679d8_0
 
 # --- trigger automatic installation of required Spark dependencies. Requires Spark setup.
 ENV PATH=/usr/local/spark/bin:$PATH

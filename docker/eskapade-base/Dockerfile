@@ -26,7 +26,7 @@ RUN cd /tmp && \
     mkdir /opt/root && \
     cd /opt/root && \
     cmake /tmp/root-6.16.00/ -Droofit=ON -Dminuit2=ON -Dxrootd=OFF -Drfio=OFF -Dpythia6=OFF -Dpythia8=OFF -Dtmva=ON && \
-    cmake --build . -- -j4 && \
+    cmake --build . -- -j3 && \
     cp /tmp/root-6.16.00/cmake/modules/RootNewMacros.cmake /tmp && \
     rm -Rf /tmp/root-6.16.00 /tmp/root_v6.16.00.source.tar.gz && \
     cd /opt/root && \
